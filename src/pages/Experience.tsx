@@ -118,9 +118,9 @@ export default function About() {
           <div className="py-4">
             <div className='leading-normal bg-gradient-to-r from-black to-textMediumGray bg-clip-text text-transparent'>
               {
-                Object.entries(selectedHistory?.experience || {}).map(([key, values]) => {
+                Object.entries(selectedHistory?.experience || {}).map(([key, values], objIndex) => {
                   return (
-                    <div>
+                    <div key={key + objIndex}>
                       <h2 className='text-lg font-bold mb-2'>{key}</h2>
                       {
                         values.map((item: string, index: number) => {
