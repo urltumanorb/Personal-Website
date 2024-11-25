@@ -14,7 +14,11 @@ type WorkHistoryProps = {
   };
 };
 
-export default function About() {
+type ExperienceProps = {
+  getIsModalOpen: (modalStatus: boolean) => void;
+};
+
+export default function About({getIsModalOpen}: ExperienceProps) {
   const [hoverIndex, setHoverIndex] = useState<null | number>(null); 
   const [selectedHistory, setSelectedHistory] = useState<null | WorkHistoryProps>(null);
 
@@ -82,6 +86,7 @@ export default function About() {
     const detailModal = document.getElementById('my_modal_2') as HTMLDialogElement;
     const selectedDetail = workHistory.find((item, whIndex) => whIndex === index);
     setSelectedHistory(selectedDetail ?? null);
+    getIsModalOpen(true);
     detailModal.showModal();
   };
 
@@ -114,7 +119,7 @@ export default function About() {
         ))}
       </div>
       <dialog id="my_modal_2" className="modal h-screen">
-        <div className="modal-box bg-bgSection w-3/4">
+        <div className="modal-box bg-bgSection max-w-2xl">
           <div className="py-4">
             <div className='leading-normal bg-gradient-to-r from-black to-textMediumGray bg-clip-text text-transparent'>
               {
@@ -140,7 +145,7 @@ export default function About() {
           </div>
         </div>
         <form method="dialog" className="modal-backdrop">
-          <button>close</button>
+          <button onClick={() => { getIsModalOpen(false)}}>close</button>
         </form>
       </dialog>
     </div>
